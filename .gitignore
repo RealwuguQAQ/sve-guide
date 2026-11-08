@@ -1,0 +1,6 @@
+node_modules/
+dist/
+deploy/card-guide-site.zip
+docs/.vitepress/cache/
+docs/.vitepress/temp/
+
