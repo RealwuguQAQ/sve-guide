@@ -113,7 +113,55 @@ powershell -ExecutionPolicy Bypass -File deploy\publish.ps1
 
 ---
 
-## 6. 常见问题
+## 6. 代码放哪：能不能挂 GitHub？
+
+**结论：代码可以放 GitHub，但别指望 GitHub Pages 当国内访问入口；而且你这台机器现在根本连不上 GitHub。**
+
+实测（本机，2026-11-08）：
+
+| 地址 | 结果 |
+|---|---|
+| `github.com:443` | ❌ 超时，21 秒连不上 |
+| `raw.githubusercontent.com` | ❌ 超时 |
+| `codeload.github.com` | ❌ 超时 |
+| `api.github.com` | ✅ 通 |
+| `gitee.com` | ✅ 通，0.1 秒 |
+| `cnb.cool` | ✅ 通，0.2 秒 |
+
+由此有三个结论：
+
+1. 现在 `git push` 到 GitHub 会直接失败，除非你挂代理或改 hosts。
+2. 就算推上去了，`github.io` 在国内也是时通时不通、时快时慢，不能当正式入口。
+3. GitHub Pages 免费版要求仓库公开（私有仓库用 Pages 要付费），源码和那张「影之诗ID 145454」截图会一并公开。
+
+### 路线 1（推荐）：CNB / Gitee 存代码 + EdgeOne Git 导入
+
+- CNB（<https://cnb.cool>，腾讯自家，国内直连）或 Gitee 存仓库，国内 push 秒传。
+- EdgeOne Pages 支持从 Git 仓库导入（官方有 CNB 插件、GitLab CI/CD 集成），构建命令填 `npm run build`，输出目录填 `dist`。
+- 好处：以后改完 Markdown，`git push` 一下自动上线，不用手动传 zip。
+
+### 路线 2：GitHub 只当备份
+
+等你有能连 GitHub 的网络（代理/加速器）再 push，对外访问仍走 EdgeOne + 自有域名。
+
+### 路线 3（最省事，现在就能做）
+
+不上 Git，每次 `deploy\publish.ps1` 重新打包，控制台「新建部署」把 zip 拖进去。
+
+> ⚠️ EdgeOne 项目建的时候要选「直接上传」还是「导入 Git 仓库」，**选定后不能改**，只能新建项目。想走自动部署就一开始选 Git 导入。
+
+### 本地仓库已经准备好了
+
+`git init` 和首次提交都已完成（分支 `main`，29 个文件），要推到哪家执行：
+
+```powershell
+git remote add origin https://cnb.cool/你的用户名/sve-guide.git   # 或 gitee 地址
+git push -u origin main
+```
+
+---
+
+## 7. 常见问题
 
 **Q：国内访问速度怎么样？**
 走境外（香港等）节点，一般首屏 1~3 秒，福利页图片多会慢一点。日常看文档够用。
