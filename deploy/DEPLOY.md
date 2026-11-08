@@ -84,13 +84,43 @@ EdgeOne Pages 会免费送你一个项目域名（形如 `xxx.edgeone.app`）。
 
 ## 4. 以后怎么改内容
 
+现在线上是 **GitHub Pages**（Actions 自动构建），改完内容一条命令就发布：
+
 ```powershell
-# 一条命令：构建 + 打包 + 校验
+# 1. 改 docs/ 里的 Markdown（本地想看效果：npm run dev）
+# 2. 发布
+$env:GITHUB_TOKEN = 'ghp_xxx'      # 或者把 token 写进 deploy\.token（已 gitignore）
+powershell -ExecutionPolicy Bypass -File deploy\update.ps1 -Message "补充牌店信息"
+```
+
+脚本做三件事：
+
+1. `npm run build` 先校验——**构建失败就不推送**，线上保持原样；
+2. `git add -A` + `git commit`；
+3. 自动拉起本地代理，把提交推到 GitHub（因为本机 `github.com` 的 DNS 指向坏 IP），Actions 构建发布，约 1 分钟生效。
+
+看进度：<https://github.com/RealwuguQAQ/sve-guide/actions>
+
+### 改图片的注意点
+
+图片放 `docs/public/images/`，引用时写 **`/images/xxx.jpg`**（站点根路径），
+**不要**写 `docs/public/images/xxx.jpg`——之前就是这样导致构建直接失败的。
+
+### 不用脚本的手动方式
+
+```powershell
+git add -A
+git commit -m "更新内容"
+git push origin main        # 需要能连上 github.com 的网络
+```
+
+### 如果以后改用 EdgeOne 托管
+
+```powershell
 powershell -ExecutionPolicy Bypass -File deploy\publish.ps1
 ```
 
-然后到 EdgeOne 控制台 → 项目 → **新建部署** → 拖入新的 `deploy\card-guide-site.zip` → 部署到「生产环境」。
-更新即时生效，不需要改域名。
+产物是 `deploy\card-guide-site.zip`，到 EdgeOne 控制台 → 项目 → **新建部署** → 拖进去即可。
 
 ---
 
