@@ -113,7 +113,18 @@ powershell -ExecutionPolicy Bypass -File deploy\publish.ps1
 
 ---
 
-## 6. GitHub Pages 路线（已配置好，只差一个 Token）
+## 6. GitHub Pages（已上线）
+
+**线上地址：<https://realwuguqaq.github.io/sve-guide/>**
+
+| 项 | 值 |
+|---|---|
+| 仓库 | <https://github.com/RealwuguQAQ/sve-guide>（public） |
+| 部署方式 | GitHub Actions（`build_type: workflow`），每次 push 到 `main` 自动构建发布 |
+| 本地 remote | `origin` 已指向该仓库，分支 `main` |
+| 首次部署 | 2026-11-08 通过 `deploy/push-github-api.mjs` 走 REST API 上传（本机连不上 github.com，但 api.github.com 通） |
+
+第一次上传时脚本是逐个文件 PUT 的，所以远端有 27 个「add xxx」提交，历史看起来比较碎——不影响使用，以后正常 `git push` 就是干净的提交了。
 
 GitHub Pages 需要的东西都已经配好了：
 
