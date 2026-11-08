@@ -113,7 +113,56 @@ powershell -ExecutionPolicy Bypass -File deploy\publish.ps1
 
 ---
 
-## 6. 代码放哪：能不能挂 GitHub？
+## 6. GitHub Pages 路线（已配置好，只差一个 Token）
+
+GitHub Pages 需要的东西都已经配好了：
+
+| 已配置 | 作用 |
+|---|---|
+| `docs/.vitepress/config.mts` 里的 `SITE_BASE` 支持 | 项目仓库的站点地址是 `https://<用户名>.github.io/<仓库名>/`，必须把子路径加进资源 URL，否则所有 CSS/JS/图片 404 |
+| `.github/workflows/deploy-pages.yml` | push 到 `main` 自动 `npm ci` + `npm run build` + 发布；仓库里不用放 `dist` |
+| 本地 git 仓库 | 分支 `main`，27 个文件，已完成 3 次提交 |
+
+上线地址会是：`https://<你的用户名>.github.io/<仓库名>/`
+
+⚠️ 两个现实问题必须先说清：
+
+1. **本机连不上 github.com**：DNS 把 github.com 解析到 `20.205.243.166`（该 IP 丢包），`140.82.112.3` 反而通。所以在这台机器上 `git push` 会失败，但 `api.github.com` 是通的。
+2. **`github.io` 在国内时通时不通**：部署成功 ≠ 国内稳定访问。
+
+### 办法 A：给我一个 Token，我走 API 上传（不用连 github.com）
+
+1. 打开 <https://github.com/settings/tokens/new>（classic token）
+2. Note 随便填，Expiration 选 7 天，勾选 **`repo`** 和 **`workflow`**
+3. 生成后把 `ghp_...` 这一串发我
+4. 我执行：
+
+```powershell
+$env:GITHUB_TOKEN = 'ghp_xxx'
+node deploy/push-github-api.mjs sve-guide
+```
+
+脚本会：建仓库 → 逐个文件走 Contents API 上传 → 开启 Pages（Actions 构建）→ 触发工作流 → 轮询到部署成功，最后打印网址。
+
+用完请**立刻**到 <https://github.com/settings/tokens> 把这个 Token 删掉。
+
+### 办法 B：你自己推（需要能上 GitHub 的网络）
+
+先在能连 GitHub 的网络下（或开着代理）：
+
+```powershell
+git remote add origin https://github.com/<你的用户名>/sve-guide.git
+git push -u origin main
+```
+
+然后仓库 → **Settings → Pages → Source** 选 **GitHub Actions**，等 Actions 跑完即可。
+
+> 本机如果只是 DNS 问题，可以先跑 `node deploy/github-proxy.mjs` 起本地代理，再用
+> `git -c http.proxy=http://127.0.0.1:17890 push`。实测浏览器类请求能通，但 git 传输在这条线路上仍不稳定，优先用办法 A。
+
+---
+
+## 7. 代码放哪：GitHub 还是国内托管？
 
 **结论：代码可以放 GitHub，但别指望 GitHub Pages 当国内访问入口；而且你这台机器现在根本连不上 GitHub。**
 
@@ -161,7 +210,7 @@ git push -u origin main
 
 ---
 
-## 7. 常见问题
+## 8. 常见问题
 
 **Q：国内访问速度怎么样？**
 走境外（香港等）节点，一般首屏 1~3 秒，福利页图片多会慢一点。日常看文档够用。
