@@ -4,3 +4,5 @@ deploy/card-guide-site.zip
 docs/.vitepress/cache/
 docs/.vitepress/temp/
 
+.openai/
+.obsidian/

@@ -2,6 +2,9 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'zh-CN',
+  // GitHub Pages 的「项目站点」地址形如 https://<user>.github.io/<repo>/，
+  // 构建时通过 SITE_BASE=/<repo>/ 传入；仓库名为 <user>.github.io 时用默认的 '/'。
+  base: process.env.SITE_BASE || '/',
   title: '实体卡新手指南',
   description: '实体卡玩法、牌店、收卡、组卡、福利与社群指南',
   cleanUrls: false,
