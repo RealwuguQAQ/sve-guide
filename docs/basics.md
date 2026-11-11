@@ -61,9 +61,25 @@
 ## 认识卡牌
 
 <figure>
-  <img src="/images/basics/card-parts.png" alt="卡面部位说明">
-  <figcaption>图 1：卡面的八个部位</figcaption>
+  <img src="/images/basics/card-parts.jpg" alt="卡面部位说明">
+  <figcaption>图 1：卡面的各个部位（编号对应官方《综合规则》的说明）</figcaption>
 </figure>
+
+官方把卡面拆成十三项，其中真正影响对局的是这几项：
+
+| 编号 | 名称 | 怎么用 |
+|---|---|---|
+| ⑤ | 费用 | 使用时要支付的能量点 |
+| ⑦ | 攻击力 | 攻击时对敌方造成的伤害 |
+| ⑧ | 生命值 | 减到 0 或以下即破坏 |
+| ⑥ | 效果文本 | 入场曲、启动能力、关键词等 |
+| ③ | 种类 | 随从 / 进化随从 / 法术 / 护符 / 主战者 |
+| ④ | 类型 | 种族或系列（如「绝杰」「士兵」），部分卡的效果会参照 |
+| ② | 职业 | 用卡框颜色表示，构筑时以此为准 |
+| ① | 卡牌名称 | 判断「同名卡最多 3 张」的依据 |
+| ⑫ | 稀有度 | 只影响收藏价值，不影响规则 |
+
+剩下的 ⑨ 衍生物信息、⑩ 卡图、⑪ 背景文本、⑬ 附注 属于信息性内容，不影响对战。
 
 卡牌分六种：
 
@@ -79,8 +95,8 @@
 ## 场地区域
 
 <figure>
-  <img src="/images/basics/playmat.png" alt="对战场地布局">
-  <figcaption>图 2：对战场地的九个区域（以自己一侧为例）</figcaption>
+  <img src="/images/basics/playmat.jpg" alt="对战场地布局">
+  <figcaption>图 2：官方卡垫上的九个区域（以自己一侧为例）</figcaption>
 </figure>
 
 | 区域 | 用途 |
@@ -99,7 +115,7 @@
 
 <figure>
   <img src="/images/basics/turn-flow.png" alt="回合的三个阶段">
-  <figcaption>图 3：一个回合的三个阶段</figcaption>
+  <figcaption>图 3：官方「回合进行表」——同一个场面在三个阶段里的样子</figcaption>
 </figure>
 
 ### 开始阶段
@@ -134,7 +150,7 @@
 
 <figure>
   <img src="/images/basics/attack.png" alt="攻击目标规则">
-  <figcaption>图 4：能攻击的目标只有主战者和横置的随从</figcaption>
+  <figcaption>图 4：能攻击的目标只有主战者和横置（已行动）的随从</figcaption>
 </figure>
 
 横置的卡会在**自己回合开始时**全部竖回来。把卡横过来还是竖着，是新手最容易摆错的地方之一：<Term label="横置">把卡横过来，表示这回合已经行动或已支付费用。攻击、部分启动能力和【守护】都会让卡横置。</Term> 一旦摆反，对手和你自己都会误判能不能攻击。
@@ -145,7 +161,7 @@
 
 <figure>
   <img src="/images/basics/evolve.png" alt="进化流程">
-  <figcaption>图 5：进化的流程与几个要点</figcaption>
+  <figcaption>图 5：进化前后的数值变化（玫瑰花园守卫者 3/3 → 4/4）</figcaption>
 </figure>
 
 要点：
@@ -204,3 +220,6 @@
 - 攻击后忘了把随从横置，导致对手误判；
 - 结束阶段忘了把 8 张手牌弃到 7 张；
 - 以为主战者生命值最多 20 点（可以超过）。
+---
+
+> 图 1–5 取自官方《影之诗：进化对决》综合规则与官方玩法说明，卡片插画与文字版权归 Cygames / Bushiroad / 网易所有，此处仅用于规则讲解。
