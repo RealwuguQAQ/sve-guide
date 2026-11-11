@@ -38,6 +38,24 @@
 .vp-doc a { text-decoration: none; }
 .vp-doc a:hover { text-decoration: underline; }
 
+.vp-doc figure { margin: 22px 0; }
+.vp-doc figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #e3e8ef;
+  border-radius: 6px;
+  background: #fff;
+}
+.vp-doc figcaption {
+  margin-top: 8px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  text-indent: 0;
+}
+
 .template-note {
   margin: 10px 0 22px;
   padding: 12px 14px;
